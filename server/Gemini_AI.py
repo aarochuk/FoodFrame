@@ -45,9 +45,7 @@ safety_settings = {
     HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
     HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
 }
-def process_image(image_url, ingredient_name):
-    print(f"Processing image from URL: {image_url} with ingredient name: {ingredient_name}")
-    # Add your image processing logic here
+
 # image_to_json: converts an images of food to text in json format
 # str, str(image link) -> str (.json)
 def image_to_json(image_name, image_link):
@@ -91,27 +89,21 @@ def image_to_json(image_name, image_link):
     response_data = json.loads(clean_response)  # Convert cleaned JSON string to a dictionary
     response_data["url"] = image_link  # Add the image link to the JSON data
 
-    # Convert the modified dictionary back into a JSON string
-    modified_response = json.dumps(response_data)
-
-    return modified_response
+    return response_data
 
 # combine_json: combines multiple JSON strings into a single JSON string
 # array[json] -> str
-def combine_json(json_list):
+def combine_json(dict_list):
     ingredients = {}
     
-    # Iterate through the list of JSON strings
-    for i, json_str in enumerate(json_list):
-        # Load the JSON string into a dictionary
-        ingredient_data = json.loads(json_str)
-        
-        # Add this dictionary to the ingredients dictionary with a new key
-        ingredients[f"ingredient {i+1}"] = ingredient_data
+    # Iterate through the list of dictionaries
+    for i, ingredient_dict in enumerate(dict_list):
+        ingredients[f"ingredient_{i+1}"] = ingredient_dict
     
     # Convert the ingredients dictionary to a JSON string
-    combined_json = json.dumps(ingredients, indent=4)  # indent for pretty printing
+    combined_json = json.dumps(ingredients, indent=4)  # Use indent for pretty printing
     return combined_json
+
 
 # generate_dish: generates a dish from the images in image_paths
 # array, array, int -> str
@@ -181,10 +173,7 @@ def generate_dish(json_list, max_calories = None, min_protein = None):
 
     response_data["url"] = image_link  # Add the image link to the JSON data
 
-    # Convert the modified dictionary back into a JSON string
-    modified_response = json.dumps(response_data)
-
-    return modified_response
+    return response_data
 
 
 # Set up API key for OPENAI
@@ -231,10 +220,6 @@ def main():
             print(result)
         else:
             print("Invalid function name")
-if __name__ == "__main__":
-    image_url = sys.argv[1]
-    ingredient_name = sys.argv[2]
-    process_image(image_url, ingredient_name)
 
 if __name__ == '__main__':
     main()
