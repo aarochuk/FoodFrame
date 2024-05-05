@@ -37,7 +37,7 @@ export default function MealDetailsScreen({ route, navigation }) {
 
   
   return (
-    <ScrollView style={styles.root}>
+    <ScrollView>
       <Image style={styles.image} source={{ uri: selectedMeal.imageUrl }} />
       <View style={styles.foodData}>
         <View>
@@ -65,10 +65,6 @@ export default function MealDetailsScreen({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  root:{
-    flex: 1,
-    height: '150%'
-  },
   image: {
     width: "100%",
     height: 300,
@@ -78,21 +74,13 @@ const styles = StyleSheet.create({
     fontSize: 19,
     color: "white",
   },
-  textPositioner: {
-    position: "absolute",
-    top: 20,
-    left: 20,
-  },
   foodData: {
-    position: "absolute",
-    top: 280,
     backgroundColor: "white",
     width: "100%",
-    borderRadius: 20,
     paddingTop: 15,
     paddingHorizontal: 15,
     flex: 1,
-    height: 1000
+    paddingBottom: 32
   },
   subtitle: {
     fontSize: 20,
