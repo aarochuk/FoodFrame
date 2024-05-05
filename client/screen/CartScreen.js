@@ -19,26 +19,48 @@ export default function CartScreen({ route, navigation }) {
     return (
       <View style={styles.root}>
         <View style={styles.inner}>
-          <Image
-            source={{ uri: itemData.item.imageUrl }}
-            style={styles.image}
-          />
+          <Image source={{ uri: itemData.item.url }} style={styles.image} />
 
           <View style={styles.bottom}>
-            <Text style={styles.title}>{itemData.item.title}</Text>
+            <Text style={styles.title}>{itemData.item.ingredient_name}</Text>
           </View>
         </View>
       </View>
     );
   }
 
+  const submitMealData = async () => {
+    try {
+      const urls = cartItems.map((item) => {
+        item.url;
+        console.log(item.url);
+      });
+      const response = await fetch("http://192.168.37.237:5000/create_dish", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          url_list: urls,
+          max_calories: 1000,
+          min_protein: 30,
+        }),
+      });
+
+      const responseData = await response.json();
+      console.log("Server response:", responseData);
+    } catch (error) {
+      console.error("Error uploading image data:", error);
+    }
+  };
+
   function createMeal() {
     setCart([]);
     navigation.navigate("IngredientsPage", {
-      newCart: cartItems
+      newCart: cartItems,
     });
+    submitMealData().catch((e) => console.log("Error submitting data:", e));
     navigation.navigate("Mealss");
-    
   }
 
   return (
@@ -54,7 +76,9 @@ export default function CartScreen({ route, navigation }) {
             onChangeText={onChangeCalories}
             value={caloricText}
           />
-          <Text style={styles.waffle}>Enter the amount of protein desired: </Text>
+          <Text style={styles.waffle}>
+            Enter the amount of protein desired:{" "}
+          </Text>
           <TextInput
             style={styles.input}
             onChangeText={onChangeProtein}
@@ -117,13 +141,13 @@ const styles = StyleSheet.create({
     marginTop: 6,
     borderWidth: 1,
     padding: 10,
-    borderRadius: 8
+    borderRadius: 8,
   },
   extras: {
-    marginHorizontal: '5%'
+    marginHorizontal: "5%",
   },
   waffle: {
     fontSize: 14,
-    fontWeight: '600'
-  }
+    fontWeight: "600",
+  },
 });

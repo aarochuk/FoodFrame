@@ -1,5 +1,5 @@
 import { FlatList, Button, View, StyleSheet, Text, Pressable } from "react-native";
-import { MEALS } from "../data/data";
+//import { MEALS } from "../data/data";
 import Ingredient from "../components/Ingredient";
 import { useLayoutEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
@@ -8,6 +8,29 @@ import { useEffect } from "react";
 
 export default function IngredientsPage({ route, navigation }) {
   const [cartData, setCartData] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
+
+  useEffect(() => {
+    const fetchIngredients = async () => {
+      try {
+        const response = await fetch('http://192.168.37.237:3000/ingredients');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        const parsedIngredients = Object.keys(data).map(key => ({
+          id: key,
+          name: data[key].ingredient_name,
+          ...data[key]
+        }));
+        setIngredients(parsedIngredients);
+      } catch (error) {
+        console.error('There has been a problem with your fetch operation:', error);
+        Alert.alert('Error', 'Failed to load ingredients');
+      }
+    };
+    fetchIngredients();
+  }, []);
 
   function showIngerdient(itemData) {
     function pressHandler() {
@@ -45,7 +68,7 @@ export default function IngredientsPage({ route, navigation }) {
         <Text style={styles.cartNum}>{cartData.length}</Text>
       </View>
       <FlatList
-        data={MEALS}
+        data={ingredients}
         keyExtractor={(item) => item.id}
         renderItem={showIngerdient}
       />

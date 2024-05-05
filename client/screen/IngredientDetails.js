@@ -13,27 +13,27 @@ export default function IngredientDetails({ route, navigation }) {
   };
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: ingData.ingredient_name,
+      title: data.ingredient_name,
     });
   }, [ingData, navigation]);
 
   return (
     <ScrollView style={styles.root}>
-      <Image style={styles.image} source={{ uri: ingData.url }} />
+      <Image style={styles.image} source={{ uri: data.url }} />
       <View style={styles.foodData}>
         <View>
           <Text style={styles.subtitle}>Macronutrients</Text>
-          <Nutri {...ingData.macronutrients} />
+          <Nutri {...data.macronutrients} />
         </View>
 
         <View>
           <Text style={styles.subtitle}>Micronutrients</Text>
           <View style={styles.nutrientRoot}>
-            {Object.keys(ingData.micronutrients).map((key) => {
+            {Object.keys(data.micronutrients).map((key) => {
               return (
                 <View style={styles.holder}>
                   <Text style={styles.tit}>{key}</Text>
-                  <Text>{ingData.micronutrients[key]}</Text>
+                  <Text>{data.micronutrients[key]}</Text>
                 </View>
               );
             })}
