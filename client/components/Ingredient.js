@@ -7,11 +7,11 @@ export default function Ingredient({ data, onPress, addData }) {
     <View style={styles.root}>
       <View style={styles.inner}>
         <Pressable onPress={onPress}>
-          <Image source={{ uri: data.imageUrl }} style={styles.image} />
+          <Image source={{ uri: data.url }} style={styles.image} />
         </Pressable>
 
         <View style={styles.bottom}>
-          <Text style={styles.title}>{data.title}</Text>
+          <Text style={styles.title}>{data.ingredient_name}</Text>
           <Pressable onPress={addData}>
             <Ionicons name="add-circle-outline" size={36} color="green" />
           </Pressable>

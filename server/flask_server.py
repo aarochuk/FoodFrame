@@ -74,7 +74,12 @@ def create_dish():
         # call get_ingredient_by_url
         ingredient_json = get_ingredient_by_url(url_list[i])
         json_list.append(ingredient_json)
+<<<<<<< HEAD
 
+=======
+    
+    print(json_list)
+>>>>>>> e3381da (fdddd2)
     # call generate_dish
     dish = generate_dish(json_list, max_calories, min_protein)
 
@@ -92,4 +97,8 @@ def create_dish():
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     app.run(debug=True, host='172.20.10.10', port=int(os.environ.get('PORT', 3000)))
+=======
+    app.run(debug=True, host='192.168.37.237', port=int(os.environ.get('PORT', 5000)))
+>>>>>>> e3381da (fdddd2)

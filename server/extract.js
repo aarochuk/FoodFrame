@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 // Importing Firebase and Database functionalities with the new Modular SDK (v9+)
+=======
+>>>>>>> e3381da (fdddd2)
 const { initializeApp } = require('firebase/app');
 const { getDatabase, ref, get } = require('firebase/database');
 
@@ -39,5 +42,9 @@ get(dbRef).then((snapshot) => {
     }
 }).catch((error) => {
     console.error(error);
+<<<<<<< HEAD
 });
   
+=======
+});
+>>>>>>> e3381da (fdddd2)
