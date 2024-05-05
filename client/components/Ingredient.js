@@ -1,12 +1,8 @@
 import { View, Text, StyleSheet, Pressable, Image, Button } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import AddButton from "./AddButton";
 
 export default function Ingredient({ data, onPress, addData }) {
-  function addData(){
-    return data;
-  }
-
+  
   return (
     <View style={styles.root}>
       <View style={styles.inner}>
@@ -16,9 +12,9 @@ export default function Ingredient({ data, onPress, addData }) {
 
         <View style={styles.bottom}>
           <Text style={styles.title}>{data.title}</Text>
-          <AddButton onPress={addData}>
+          <Pressable onPress={addData}>
             <Ionicons name="add-circle-outline" size={36} color="green" />
-          </AddButton>
+          </Pressable>
         </View>
       </View>
     </View>
