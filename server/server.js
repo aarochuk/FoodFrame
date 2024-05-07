@@ -7,13 +7,6 @@ const PORT = 3000;
 
 // Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCiXpK0UMunTJiM8ZvaPutS-l9yOgieWiQ",
-    authDomain: "foodframe-422304.firebaseapp.com",
-    projectId: "foodframe-422304",
-    storageBucket: "foodframe-422304.appspot.com",
-    messagingSenderId: "121525382197",
-    appId: "1:121525382197:web:f5a5a391a9a9236668957c",
-    measurementId: "G-FHLHG5N0HW"
 };
 
 // Initialize Firebase
